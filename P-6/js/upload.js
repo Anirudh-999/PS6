@@ -10,44 +10,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle drag and drop
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
-        dropZone.classList.add('drag-over');
+        dropZone.classList.add('highlight');
     });
 
     dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('drag-over');
+        dropZone.classList.remove('highlight');
     });
 
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
-        dropZone.classList.remove('drag-over');
-        const droppedFiles = Array.from(e.dataTransfer.files);
+        dropZone.classList.remove('highlight');
+        const droppedFiles = e.dataTransfer.files;
         handleFiles(droppedFiles);
     });
 
     // Handle file input
     fileInput.addEventListener('change', (e) => {
-        const selectedFiles = Array.from(e.target.files);
+        const selectedFiles = e.target.files;
         handleFiles(selectedFiles);
     });
 
-    function handleFiles(newFiles) {
-        files = [...files, ...newFiles];
-        updateFileList();
-        startUpload.disabled = files.length === 0;
-    }
-
-    function updateFileList() {
-        uploadList.innerHTML = '';
-        files.forEach((file, index) => {
+    function handleFiles(files) {
+        for (const file of files) {
             const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
-            fileItem.innerHTML = `
-                <span class="file-name">${file.name}</span>
-                <span class="file-size">${formatFileSize(file.size)}</span>
-                <span class="remove-file" data-index="${index}">×</span>
-            `;
+            fileItem.classList.add('file-item');
+            fileItem.textContent = file.name;
+    
+            // Add a remove button (optional)
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', () => {
+                uploadList.removeChild(fileItem);
+                // Handle file removal on server-side if needed
+            });
+            fileItem.appendChild(removeButton);
+    
             uploadList.appendChild(fileItem);
-        });
+    
+            // Send the file to the server-side script (e.g., using Fetch API or XMLHttpRequest)
+            const formData = new FormData();
+            formData.append('file', file);
+    
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Handle response from server
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
     }
 
     // Handle file removal

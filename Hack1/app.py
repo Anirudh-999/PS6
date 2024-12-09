@@ -15,23 +15,28 @@ app.config["UPLOAD_FOLDER"] = r"C:\Hack1\uploads"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("index.html")
 
+@app.route("/junk")
+def junk():
+    return render_template("junk.html")
 
-@app.route("/upload/<doc_type>", methods=["GET", "POST"])
-def upload_file(doc_type):
+@app.route("/document-upload", methods=["GET", "POST"])
+def document_upload():
     if request.method == "POST":
+        document_type = request.form.get("document_type")
+        print(document_type)
         file = request.files.get("file")
         if not file or file.filename == "":
             return "No file uploaded"
 
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
         file.save(file_path)
-        return redirect(url_for("process_file", doc_type=doc_type, file_name=file.filename))
+        return redirect(url_for("process_file", doc_type="unknown", file_name=file.filename))
 
-    return render_template("upload.html", doc_type=doc_type)
+    return render_template("document-upload.html")
 
 
 @app.route("/process/<doc_type>/<file_name>", methods=["GET", "POST"])
@@ -74,9 +79,17 @@ def process_validation(doc_type, extracted_text):
     feedback = validation_func(extracted_text) if validation_func else "Invalid document type"
     feedback = re.sub(r"Parts\s*\{\s*text:\s*\"(.*?)\"\s*\}", r"\1", feedback, flags=re.DOTALL)
     feedback = re.sub(r'role:\s*\"model\"', "", feedback).strip()
+
+    #editing here
+
+    if "text:" in feedback:
+        start_index = feedback.index("text:") + len("text:") + 2  
+        end_index = feedback.index('}', start_index)
+        extracted_text = feedback[start_index:end_index].strip()
+        feedback = extracted_text
+    
     return feedback.replace("\n", "<br>")
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-

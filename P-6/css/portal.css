@@ -1,0 +1,152 @@
+/* Portal integration styles */
+.portal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.portal-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.portal-header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.portal-header p {
+    color: #64748b;
+}
+
+.portal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.portal-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+.portal-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Portal list styles */
+.portal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.portal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+}
+
+.portal-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.portal-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.portal-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.portal-info p {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+/* Queue styles */
+.queue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.queue-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--background-color);
+}
+
+.queue-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.queue-info p {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    height: 0.5rem;
+    background-color: var(--border-color);
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+/* History styles */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.history-item.success {
+    background-color: #dcfce7;
+}
+
+.history-item.error {
+    background-color: #fee2e2;
+}
+
+.history-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.history-info p {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.timestamp {
+    font-size: 0.75rem;
+    color: #64748b;
+}

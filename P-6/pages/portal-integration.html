@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Integration - Trade Document Validator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/portal.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TradeValidator</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="validation-results.html">Results</a>
+            <a href="portal-integration.html" class="active">Portal</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="portal-container">
+        <header class="portal-header">
+            <h1>Regulatory Portal Integration</h1>
+            <p>Submit validated documents to regulatory portals</p>
+        </header>
+
+        <div class="portal-grid">
+            <div class="portal-card">
+                <h2>Available Portals</h2>
+                <div class="portal-list">
+                    <div class="portal-item">
+                        <div class="portal-info">
+                            <img src="../assets/icons/customs.svg" alt="Customs" class="portal-icon">
+                            <div>
+                                <h3>Customs Portal</h3>
+                                <p>Submit customs declarations and invoices</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="portal-item">
+                        <div class="portal-info">
+                            <img src="../assets/icons/tax.svg" alt="Tax" class="portal-icon">
+                            <div>
+                                <h3>Tax Authority Portal</h3>
+                                <p>Submit tax documents and returns</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <h2>Submission Queue</h2>
+                <div class="queue-list">
+                    <div class="queue-item pending">
+                        <div class="queue-info">
+                            <h3>Invoice-2024-001.pdf</h3>
+                            <p>Pending submission to Customs Portal</p>
+                        </div>
+                        <button class="btn btn-secondary">Submit Now</button>
+                    </div>
+                    <div class="queue-item processing">
+                        <div class="queue-info">
+                            <h3>Declaration-123.pdf</h3>
+                            <p>Processing...</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portal-card">
+                <h2>Submission History</h2>
+                <div class="history-list">
+                    <div class="history-item success">
+                        <div class="history-info">
+                            <h3>Invoice-2024-001.pdf</h3>
+                            <p>Successfully submitted to Tax Portal</p>
+                            <span class="timestamp">2024-02-15 14:30</span>
+                        </div>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                    <div class="history-item error">
+                        <div class="history-info">
+                            <h3>Declaration-122.pdf</h3>
+                            <p>Submission failed - Invalid format</p>
+                            <span class="timestamp">2024-02-14 09:15</span>
+                        </div>
+                        <button class="btn btn-secondary">Retry</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 TradeValidator. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/portal.js" type="module"></script>
+</body>
+</html>

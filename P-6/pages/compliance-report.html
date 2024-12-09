@@ -1,0 +1,103 @@
+<!-- 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Report - Trade Document Validator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/compliance.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TradeValidator</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="validation-results.html">Results</a>
+            <a href="compliance-report.html" class="active">Report</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="compliance-container">
+        <header class="compliance-header">
+            <h1>Compliance Report</h1>
+            <div class="report-actions">
+                <button class="btn btn-secondary" id="downloadPdf">Download PDF</button>
+                <button class="btn btn-secondary" id="exportCsv">Export CSV</button>
+                <button class="btn btn-primary" id="shareReport">Share Report</button>
+            </div>
+        </header>
+
+        <div class="report-grid">
+            <div class="report-card summary">
+                <h2>Executive Summary</h2>
+                <div class="summary-stats">
+                    <div class="stat">
+                        <span class="stat-value">85%</span>
+                        <span class="stat-label">Overall Compliance</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Documents Analyzed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">3</span>
+                        <span class="stat-label">Issues Found</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-card findings">
+                <h2>Key Findings</h2>
+                <div class="findings-list">
+                    <div class="finding-item warning">
+                        <div class="finding-header">
+                            <span class="finding-icon">!</span>
+                            <h3>Missing Tax Information</h3>
+                        </div>
+                        <p>Tax registration numbers missing in 2 invoices</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                    <div class="finding-item success">
+                        <div class="finding-header">
+                            <span class="finding-icon">✓</span>
+                            <h3>Document Format</h3>
+                        </div>
+                        <p>All documents follow standard format requirements</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-card recommendations">
+                <h2>Recommendations</h2>
+                <div class="recommendations-list">
+                    <div class="recommendation-item">
+                        <h3>1. Update Tax Information</h3>
+                        <p>Add missing tax registration numbers to ensure compliance with tax regulations.</p>
+                        <div class="priority high">High Priority</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <h3>2. Standardize Date Format</h3>
+                        <p>Use consistent date format across all documents (YYYY-MM-DD recommended).</p>
+                        <div class="priority medium">Medium Priority</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 TradeValidator. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/compliance.js" type="module"></script>
+</body>
+</html> 
+
+
+-->

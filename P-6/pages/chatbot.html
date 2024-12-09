@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Trade Document Validator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/chatbot.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TradeValidator</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="document-upload.html">Upload</a>
+            <a href="chatbot.html" class="active">AI Assistant</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="chatbot-container">
+        <div class="chat-sidebar">
+            <div class="chat-history">
+                <h2>Recent Chats</h2>
+                <div class="history-list">
+                    <div class="history-item active">
+                        <span class="history-title">Invoice Requirements</span>
+                        <span class="history-date">Today</span>
+                    </div>
+                    <div class="history-item">
+                        <span class="history-title">Compliance Check</span>
+                        <span class="history-date">Yesterday</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary new-chat">New Chat</button>
+        </div>
+
+        <div class="chat-main">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant">
+                    <div class="message-content">
+                        <p>Hello! I'm your AI compliance assistant. How can I help you today?</p>
+                    </div>
+                </div>
+                <div class="message user">
+                    <div class="message-content">
+                        <p>What are the required fields for an international invoice?</p>
+                    </div>
+                </div>
+                <div class="message assistant">
+                    <div class="message-content">
+                        <p>For an international invoice, you need:</p>
+                        <ul>
+                            <li>Invoice number and date</li>
+                            <li>Seller and buyer details</li>
+                            <li>Product description and quantity</li>
+                            <li>Unit price and total amount</li>
+                            <li>Payment terms</li>
+                            <li>Country of origin</li>
+                            <li>Incoterms</li>
+                        </ul>
+                        <p>Would you like me to explain any of these in detail?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                ></textarea>
+                <button id="sendMessage" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+
+        <div class="chat-context">
+            <h2>Related Resources</h2>
+            <div class="context-items">
+                <a href="#" class="context-item">
+                    <h3>Invoice Guidelines</h3>
+                    <p>Complete guide to international invoicing</p>
+                </a>
+                <a href="#" class="context-item">
+                    <h3>Compliance Checklist</h3>
+                    <p>Step-by-step compliance verification</p>
+                </a>
+                <a href="#" class="context-item">
+                    <h3>Common Issues</h3>
+                    <p>Solutions to frequent compliance problems</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/chatbot.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Results - Trade Document Validator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/validation.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TradeValidator</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="document-upload.html">Upload</a>
+            <a href="validation-results.html" class="active">Results</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="validation-container">
+        <header class="validation-header">
+            <h1>Document Validation Results</h1>
+            <div class="document-info">
+                <span class="document-name">Invoice-2024-001.pdf</span>
+                <span class="document-status success">Validated</span>
+            </div>
+        </header>
+
+        <div class="validation-grid">
+            <div class="validation-card">
+                <h2>OCR Results</h2>
+                <div class="ocr-content">
+                    <div class="ocr-field">
+                        <span class="field-label">Invoice Number:</span>
+                        <span class="field-value">INV-2024-001</span>
+                    </div>
+                    <div class="ocr-field">
+                        <span class="field-label">Date:</span>
+                        <span class="field-value">2024-02-15</span>
+                    </div>
+                    <div class="ocr-field">
+                        <span class="field-label">Amount:</span>
+                        <span class="field-value">$5,000.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="validation-card">
+                <h2>Compliance Check</h2>
+                <div class="compliance-checks">
+                    <div class="check-item success">
+                        <span class="check-icon">✓</span>
+                        <div class="check-details">
+                            <h3>Document Format</h3>
+                            <p>Valid invoice format detected</p>
+                        </div>
+                    </div>
+                    <div class="check-item warning">
+                        <span class="check-icon">!</span>
+                        <div class="check-details">
+                            <h3>Tax Information</h3>
+                            <p>Tax registration number missing</p>
+                        </div>
+                    </div>
+                    <div class="check-item success">
+                        <span class="check-icon">✓</span>
+                        <div class="check-details">
+                            <h3>Required Fields</h3>
+                            <p>All mandatory fields present</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="validation-card">
+                <h2>Suggested Actions</h2>
+                <div class="action-list">
+                    <div class="action-item">
+                        <button class="btn btn-primary">Add Tax Information</button>
+                        <p>Add missing tax registration number</p>
+                    </div>
+                    <div class="action-item">
+                        <button class="btn btn-secondary">Generate Report</button>
+                        <p>Create detailed compliance report</p>
+                    </div>
+                    <div class="action-item">
+                        <button class="btn btn-secondary">Submit to Portal</button>
+                        <p>Submit to regulatory portal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 TradeValidator. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/validation.js" type="module"></script>
+</body>
+</html>

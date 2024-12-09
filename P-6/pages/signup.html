@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Trade Document Validator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/auth.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TradeValidator</div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="signup.html" class="active">Sign Up</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <h1>Create Account</h1>
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="auth-links">
+                Already have an account? <a href="login.html">Login</a>
+            </p>
+            <div class="oauth-providers">
+                <a href="#" class="oauth-icon-link">
+                    <img src="../Icon/google.png" alt="Google" class="oauth-icon">
+                </a>
+                <a href="#" class="oauth-icon-link">
+                    <img src="../Icon/meta.png" alt="Facebook" class="oauth-icon">
+                </a>
+                <a href="#" class="oauth-icon-link">
+                    <img src="../Icon/twitter.png" alt="Twitter" class="oauth-icon">
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 TradeValidator. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/auth.js" type="module"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, jsonify, redirect, url_for
+from flask import Flask, request, render_template, jsonify, redirect, url_for, session
 import os
 import re
+import html
 from OCR import extract_details
 from llm_integration import (
     validate_gst_certificate,
@@ -8,12 +9,14 @@ from llm_integration import (
     validate_pan_card,
     validate_bol,
     validate_export_declaration,
+    chat
 )
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = r"C:\Hack1\uploads"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
+app.secret_key = os.urandom(24)
 
 @app.route("/")
 def home():
@@ -26,7 +29,7 @@ def junk():
 @app.route("/document-upload", methods=["GET", "POST"])
 def document_upload():
     if request.method == "POST":
-        document_type = request.form.get("document_type")
+        document_type = request.form["documentType"]
         print(document_type)
         file = request.files.get("file")
         if not file or file.filename == "":
@@ -34,9 +37,43 @@ def document_upload():
 
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
         file.save(file_path)
-        return redirect(url_for("process_file", doc_type="unknown", file_name=file.filename))
+        return redirect(url_for("process_file", doc_type=document_type, file_name=file.filename))
 
     return render_template("document-upload.html")
+
+
+@app.route("/chat", methods=["GET", "POST"])
+def chat_bot():
+    if request.method == "POST":
+        user_message = request.form.get("message", "")  # Get the form input from the POST request
+        if not user_message:
+            return render_template("chat.html", error="No message provided")
+
+        prompt = f"""
+        You are a helpful chatbot assistant. Answer the following user question in a conversational and friendly tone: 
+        and you are required to only answer the queries regarding the file names listed below. If any other topic is mentioned,
+        reply with: I'm only designed to answer specific queries.
+
+        documents: invoice, bill of lading, GST certificate, PAN card, export documents.
+
+        User: {user_message}
+        """
+
+        try:
+            raw_response = chat(prompt)  # Replace `chat` with your LLM function
+            
+            # Extract the actual text content from the raw response
+            match = re.search(r'text:\s*&quot;(.*?)&quot;', raw_response, re.DOTALL)
+            if match:
+                chatbot_response = match.group(1).replace("\\n", "\n").strip()  # Clean up escaped newlines and spaces
+            else:
+                chatbot_response = "Unexpected response format."
+            
+            return render_template("chat.html", response=chatbot_response)
+        except Exception as e:
+            return render_template("chat.html", error=str(e))
+
+    return render_template("chat.html")
 
 
 @app.route("/process/<doc_type>/<file_name>", methods=["GET", "POST"])
@@ -47,23 +84,28 @@ def process_file(doc_type, file_name):
         edited_details = request.form["extracted_details"]
         validation_feedback = process_validation(doc_type, edited_details)
 
-        # Save the edited file
-        edited_file_path = os.path.join(app.config["UPLOAD_FOLDER"], f"edited_{file_name}.txt")
-        with open(edited_file_path, "w", encoding="utf-8") as f:
-            f.write(edited_details)
+        # session.pop('validation_feedback', None)
+        session['validation_feedback'] = validation_feedback
 
-        return jsonify({
-            "feedback": validation_feedback,
-        })
-
+        print(validation_feedback)
+        return "hi"
     extracted_text = extract_details(file_path)
 
     return render_template(
-        "edit_and_validate.html",
+        "edit.html",  
         details=extracted_text,
         file_name=file_name,
         doc_type=doc_type,
     )
+
+@app.route("/feedback/<doc_type>")
+def show_feedback(doc_type):
+
+    feedback = session.pop('validation_feedback', 'No feedback available')
+    print("this is line 69:"+feedback)
+
+    return render_template("validation-results.html", feedback=format_chat_response(feedback), doc_type=doc_type)
+
 
 
 def process_validation(doc_type, extracted_text):
@@ -90,6 +132,20 @@ def process_validation(doc_type, extracted_text):
     
     return feedback.replace("\n", "<br>")
 
+def format_chat_response(response):
+
+    response = html.unescape(response)
+
+    response = re.sub(r'\*\*([^*]+):\*\*', r'<strong>\1:</strong>', response)  # Bold key sections
+    response = response.replace("* ", "<li>").replace("\n", "</li>")  # Format as list items
+
+    formatted_response = f"<ul>{response}</ul>"
+    return formatted_response
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
+

@@ -4,49 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validation Results - Trade Document Validator</title>
-    <link rel="stylesheet" href="C:\Users\Anirudh\Downloads\Hack1\Hack1\static\styles\style.css">
-    <link rel="stylesheet" href="C:\Users\Anirudh\Downloads\Hack1\Hack1\static\styles\navbar.css">
-    <link rel="stylesheet" href="C:\Users\Anirudh\Downloads\Hack1\Hack1\static\styles\validation.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/validation.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-brand">TradeValidator</div>
         <div class="nav-links">
-            <a href="C:\Users\Anirudh\Downloads\Hack1\Hack1\templates\index.html">Home</a>
+            <a href="{{ url_for('home') }}">Home</a>
             <a href="dashboard.html">Dashboard</a>
-            <a href="document-upload.html">Upload</a>
+            <a href="{{ url_for('document_upload') }}">Upload</a>
             <a href="validation-results.html" class="active">Results</a>
-            <a href="profile.html">Profile</a>
         </div>
     </nav>
 
+    <p>{{"details"}}</p>
     <main class="validation-container">
         <header class="validation-header">
             <h1>Document Validation Results</h1>
             <div class="document-info">
-                <span class="document-name">Invoice-2024-001.pdf</span>
                 <span class="document-status success">Validated</span>
             </div>
         </header>
 
         <div class="validation-grid">
-            <div class="validation-card">
-                <h2>OCR Results</h2>
-                <div class="ocr-content">
-                    <div class="ocr-field">
-                        <span class="field-label">Invoice Number:</span>
-                        <span class="field-value">INV-2024-001</span>
-                    </div>
-                    <div class="ocr-field">
-                        <span class="field-label">Date:</span>
-                        <span class="field-value">2024-02-15</span>
-                    </div>
-                    <div class="ocr-field">
-                        <span class="field-label">Amount:</span>
-                        <span class="field-value">$5,000.00</span>
-                    </div>
-                </div>
-            </div>
 
             <div class="validation-card">
                 <h2>Compliance Check</h2>
@@ -78,17 +60,8 @@
             <div class="validation-card">
                 <h2>Suggested Actions</h2>
                 <div class="action-list">
-                    <div class="action-item">
-                        <button class="btn btn-primary">Add Tax Information</button>
-                        <p>Add missing tax registration number</p>
-                    </div>
-                    <div class="action-item">
-                        <button class="btn btn-secondary">Generate Report</button>
-                        <p>Create detailed compliance report</p>
-                    </div>
-                    <div class="action-item">
-                        <button class="btn btn-secondary">Submit to Portal</button>
-                        <p>Submit to regulatory portal</p>
+                    <div class="feedback-container">
+                        <p>{{ feedback|safe }}</p> 
                     </div>
                 </div>
             </div>

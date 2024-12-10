@@ -15,7 +15,7 @@
             <a href="{{ url_for('home') }}" class="active">Home</a>
             <a href="{{url_for('junk')}}">Login</a>
             <a href="{{url_for('junk')}}">Sign Up</a>
-            <a href="pages/dashboard.html">Dashboard</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </div>
     </nav>
 
@@ -40,7 +40,7 @@
                     </div>
                 </a>
                 </a>
-                <a href="C:\Users\Anirudh\Downloads\Hack1\Hack1\templates\edit_and_validate.html" class="btn">
+                <a href="{{url_for('chat_bot')}}" class="btn">
                 <div class="feature-card">
                     <img src="Images/AI Assistant.jpeg" alt="AI">
                     <h3>AI Assistant</h3>

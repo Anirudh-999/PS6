@@ -6,13 +6,6 @@ import pypdf
 
 document_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan"
 
-def organise_details(text):
-    """
-    This function organizes the extracted text into a dictionary.
-    """
-    organized_details = text
-    return organized_details
-
 def generate_llm_response(prompt):
     """
     Generates a response using Gemini LLM based on the provided prompt.
@@ -32,28 +25,25 @@ def generate_llm_response(prompt):
 
     chat_session = model.start_chat(history=[])
     response = chat_session.send_message(prompt)
-    
-    # Ensure response is in text format, assuming candidates[0].content is a string
-    response_text = str(response.candidates[0].content).strip()  # Convert to string and remove extra spaces
+
+    response_text = str(response.candidates[0].content).strip()  
     return response_text
 
 
-
 def format_response(response_text):
-    """
-    Formats the LLM-generated response for better readability by ensuring newlines are properly handled
-    and markdown-like formatting is respected.
-    """
-    # formatted_response = escape(response_text).replace("\n", "<br>").replace("**", "<b>").replace("*", "")
+
     formatted_response = escape(response_text).replace('\\"', '"').replace("\\'", "'")
     return formatted_response
 
-# Validation Functions
+    """
+    Validation Functions 
+    """ 
+
 
 def validate_gst_certificate(extracted_text):
 
 
-    gst_dir = r"C:\Hack1\ref_doc\gst_certificate.pdf"
+    gst_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan\gst_certificate.pdf"
 
     try:
         # Initialize PdfReader with the file path
@@ -89,8 +79,7 @@ def validate_gst_certificate(extracted_text):
 
 
 def validate_invoice_data(extracted_text):
-    
-    inv_dir = r"C:\Hack1\ref_doc\invoice.pdf"
+    inv_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan\invoice.pdf"
 
     try:
         # Initialize PdfReader with the file path
@@ -106,27 +95,24 @@ def validate_invoice_data(extracted_text):
     except Exception as e:
         print(f"Error reading the PDF: {e}")
 
-    
-    """
-    Validates invoice details using Gemini LLM for proper customs and tax compliance.
-    """
+    # Use f-string for proper substitution
     prompt = f"""
     You are a customs and tax compliance expert. Review the following invoice data for accuracy:
 
     {extracted_text}
-    
-    refer to the rules and regulations mentioned in this text
+
+    Refer to the rules and regulations mentioned in this text:
 
     {text}
-    
-    Format the response in structured sections using bullet points and line breaks. and limit the output to 100 words
+
+    Format the response in structured sections using bullet points and line breaks. Limit the output to 100 words.
     """
     response = generate_llm_response(prompt)
     return format_response(response)
 
 
 def validate_pan_card(extracted_text):
-    pan_dir = r"C:\Hack1\ref_doc\pan_card.pdf"
+    pan_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan\pan_card.pdf"
 
     try:
         # Initialize PdfReader with the file path
@@ -161,7 +147,7 @@ def validate_pan_card(extracted_text):
 
 
 def validate_bol(extracted_text):
-    bol_dir = r"C:\Hack1\ref_doc\bol.pdf"
+    bol_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan\bol.pdf"
 
     try:
         # Initialize PdfReader with the file path
@@ -196,7 +182,7 @@ def validate_bol(extracted_text):
 
 
 def validate_export_declaration(extracted_text):
-    exp_dir = r"C:\Hack1\ref_doc\export_declaration.pdf"
+    exp_dir = r"C:\Users\Anirudh\Desktop\IITM\INTERN\document_scan\export_declaration.pdf"
 
     try:
         # Initialize PdfReader with the file path
@@ -228,3 +214,9 @@ def validate_export_declaration(extracted_text):
     """
     response = generate_llm_response(prompt)
     return format_response(response)
+
+
+def chat(prompt):
+    response = generate_llm_response(prompt)
+    return format_response(response)
+
